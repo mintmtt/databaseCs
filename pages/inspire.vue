@@ -46,20 +46,24 @@
                   SIGN IN
                 </v-btn></v-hover
               >
-              <v-btn color="info" class="mr-4" @click="loginGoogle">
+              <v-btn color="info" class="mr-4" @click="checkUser">
                 Google
               </v-btn>
-              <v-btn color="error" class="mr-4" @click="logout"> logout </v-btn>
+              <v-btn color="red" class="mr-4" @click="logout">
+                logout
+              </v-btn>
+              <!-- <v-btn color="error" class="mr-4" @click="logout"> logout </v-btn>    -->
             </v-form>
           </v-container>
         </v-col>
-      </v-row>
+      </v-row>d
     </v-card>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase/app'
+import { db } from '~/plugins/firebaseConfig.js'
 export default {
   layout: 'login',
   layout: 'loginGoogle',
@@ -112,6 +116,21 @@ export default {
           console.log('email= ' + email)
           console.log('credential' + credential)
         })
+    },checkUser(){
+      var user = firebase.auth().currentUser;
+      console.log(user===null)
+    },logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          // Sign-out successful.
+          console.log('Sign-out successful')
+        })
+        .catch((error) => {
+          // An error happened.
+          console.log(error)
+        })
     },
     login() {
       firebase
@@ -125,12 +144,8 @@ export default {
           console.log('token : ' + token)
           console.log('user : ' + user)
           console.log('login successful!')
-          this.$router.replace('/') 
-          if (user.email == 'admin123@gmail.com') {
-            this.$router.replace('/admin')
-          } elef (user.email == 'owner123@gmail.com') {
-            this.$router.replace('/owner')
-          }
+          // this.$router.replace('/') 
+          
         })
 
         .catch((error) => {

@@ -24,7 +24,7 @@
       <v-rating v-model="rating" label="Rating"></v-rating>
       <v-slider v-model="slider" min="0" max="100" label="Slider"></v-slider>
       <v-btn color="success" class="mr-4" @click="addData">Submit</v-btn>
-      <v-btn color="warning" class="mr-4" @click="reset"> Reset Form </v-btn>
+      <v-btn color="warning" class="mr-4" @click="checkUser"> Reset Form </v-btn>
       <CollectionText />
     </v-form>
   </v-container>
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     addData() {
-      // เก็บข้อมูล Form ใน collection MyForm ( มี 1 document แต่จะ update ข้อมูลเรื่อย ๆ )
+      // เก็บข้อมูล Form ใน collection MyForm ( มี 1 document แต่จะ u    pdate ข้อมูลเรื่อย ๆ )
       var data = {
         txt: this.txt,
         checkbox: this.checkbox,
@@ -86,6 +86,9 @@ export default {
         .catch(function (error) {
           console.error('Error writing document: ', error)
         })
+    },checkUser(){
+      var user = firebase.auth().currentUser;
+      console.log(user===null)
     },
     created() {
       this.getData()
