@@ -10,6 +10,7 @@
             <v-form>
               <v-row>
                 <v-col cols="12">
+                  <v-btn @click="admin"> admin click here </v-btn>
                   <h1 class="logtitle">Sign in to work</h1>
                   <v-text-field
                     v-model="email"
@@ -47,16 +48,14 @@
                 </v-btn></v-hover
               >
               <v-btn color="info" class="mr-4" @click="checkUser">
-                Google
+                Check
               </v-btn>
-              <v-btn color="red" class="mr-4" @click="logout">
-                logout
-              </v-btn>
+              <v-btn color="red" class="mr-4" @click="logout"> logout </v-btn>
               <!-- <v-btn color="error" class="mr-4" @click="logout"> logout </v-btn>    -->
             </v-form>
           </v-container>
-        </v-col>
-      </v-row>d
+        </v-col> </v-row
+      >d
     </v-card>
   </div>
 </template>
@@ -86,6 +85,9 @@ export default {
     }
   },
   methods: {
+    admin() {
+      this.$router.replace('/inadmin')
+    },
     loginGoogle() {
       const provider = new firebase.auth.GoogleAuthProvider()
       provider.addScope('https://www.googleapis.com/auth/contacts.readonly')
@@ -116,10 +118,12 @@ export default {
           console.log('email= ' + email)
           console.log('credential' + credential)
         })
-    },checkUser(){
-      var user = firebase.auth().currentUser;
-      console.log(user===null)
-    },logout() {
+    },
+    checkUser() {
+      var user = firebase.auth().currentUser
+      console.log(user === null)
+    },
+    logout() {
       firebase
         .auth()
         .signOut()
@@ -143,9 +147,8 @@ export default {
           const user = result.user
           console.log('token : ' + token)
           console.log('user : ' + user)
-          console.log('login successful!')
-          // this.$router.replace('/') 
-          
+          alert('login successful!')
+          this.$router.replace('/')
         })
 
         .catch((error) => {

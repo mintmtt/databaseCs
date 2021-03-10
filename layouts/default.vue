@@ -80,6 +80,11 @@ export default {
           title: 'Inspire',
           to: '/inspire',
         },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Inadmin',
+          to: '/inadmin',
+        },
           {
           icon: 'mdi-chart-bubble',
           title: 'Admin',
