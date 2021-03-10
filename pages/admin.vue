@@ -10,7 +10,7 @@
             <v-form>
               <v-row>
                 <v-col cols="12">
-                  <v-btn @click="admin"> admin click here </v-btn>
+                 
                   <h1 class="logtitle">Sign in to work</h1>
                   <v-text-field
                     v-model="email"
@@ -95,40 +95,6 @@ export default {
     }
   },
   methods: {
-    admin() {
-      this.$router.replace('/inadmin')
-    },
-    loginGoogle() {
-      const provider = new firebase.auth.GoogleAuthProvider()
-      provider.addScope('https://www.googleapis.com/auth/contacts.readonly')
-      firebase
-        .auth()
-        .signInWithPopup(provider)
-        .then((result) => {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          const token = result.credential.accessToken
-          // The signed-in user info.
-          const user = result.user
-          // ...
-          console.log('token : ' + token)
-          console.log('user : ' + user)
-        })
-
-        .catch(function (error) {
-          // Handle Errors here.
-          const errorCode = error.code
-          const errorMessage = error.message
-          // The email of the user's account used.
-          const email = error.email
-          // The firebase.auth.AuthCredential type that was used.
-          const credential = error.credential
-          // ...
-          console.log('errorCode= ' + errorCode)
-          console.log('errorMessage= ' + errorMessage)
-          console.log('email= ' + email)
-          console.log('credential' + credential)
-        })
-    },
     checkUser() {
       var user = firebase.auth().currentUser
       console.log(user === null)
@@ -158,7 +124,6 @@ export default {
           console.log('token : ' + token)
           console.log('user : ' + user)
           alert('login successful!')
-          this.$router.replace('/')
         })
 
         .catch((error) => {
